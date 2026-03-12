@@ -30,8 +30,6 @@ The data for this project was sourced from the **TCGA Pan-Cancer Atlas 2018** vi
 ## 3. Data Pipeline & ETL (Process)
 A programmatic ETL pipeline was built in Python to resolve dimensionality and variance issues within the 16,564 high-quality unique genes identified:
 
-
-
 * **Targeted Extraction:** The pipeline utilized data chunking to filter strictly for high-impact biomarkers (ESR1, ERBB2, and TP53) from massive mRNA sequencing files.
 * **Integrity Check:** Standardized `PATIENT_ID` keys (e.g., TCGA-3C-AAAU) with genomic sample IDs, performing an Inner Join to ensure 100% data alignment for the cohort.
 * **Normalization:** Applied a `Log2(x + 1)` transformation via NumPy to normalize high-variance RSEM counts (ranging from zero to thousands) for accurate visual clustering.
@@ -40,16 +38,12 @@ A programmatic ETL pipeline was built in Python to resolve dimensionality and va
 ## 4. Exploratory Analysis (Analyze)
 Before visual rendering, SQL Window Functions (`NTILE`) were utilized in BigQuery to isolate extreme quartiles (Top 25% vs. Bottom 25%) and identify hidden prognostic trends:
 
-
-
 * **The TP53 "Guardian" Effect:** High TP53 expression demonstrated a protective prognostic trend, with a mean survival of 43.67 months compared to 39.79 months in the low expression quartile (a ~10% extension).
 * **The ERBB2 (HER2) Survival Impact:** High ERBB2 expression (Top 25%) correlated with a ~4-month decrease in mean survival (37.96 months) compared to the low expression group (42.05 months).
 * **Univariate Sensitivity:** Initial SQL analysis of ESR1 alone suggested a survival deficit for high-expression patients; however, multivariate stratification revealed that the deficit was specifically driven by the aggressive HER2+ (ERBB2) subset.
 
 ## 5. Visual Insights & Clinical Findings (Share)
 The interactive Tableau dashboard utilizes Level of Detail (LOD) concepts to establish mean survival benchmarks while maintaining data transparency:
-
-
 
 * **Genomic Stratification:** A scatter plot of Log2_ESR1 vs. Log2_ERBB2 identifies distinct clusters, proving that mRNA sequencing can effectively categorize biological subtypes.
 * **The "Average" Illusion:** Box plots were utilized to reveal survival distribution within the "Double Negative" cohort, which is often masked by simple mean calculations. These revealed extreme outliers and highly unpredictable patient outcomes.
@@ -65,6 +59,10 @@ The interactive Tableau dashboard utilizes Level of Detail (LOD) concepts to est
 * **Biomarker Scope:** This analysis relies on a "proxy" subtype based on only two genes; true clinical classification often includes Progesterone Receptor (PR) status and Ki-67 indexes.
 * **mRNA vs. Protein Expression:** Data measures mRNA transcription (RSEM), which is not identical to physical protein expression measured via Immunohistochemistry (IHC) staining.
 * **Retrospective Bias:** The dataset represents a historical cohort where survival may be influenced by unrecorded, non-standardized treatment regimens (e.g., chemotherapy or targeted therapies like Herceptin).
+
+---
+## 📄 Detailed Technical Report
+For a deep dive into the scientific methodology, clinical reasoning, and prognostic findings of this study, please refer to the [Full Technical Case Study (PDF)](./TCGA_Breast_Cancer_Technical_Analysis.pdf).
 
 ---
 ### Interactive Dashboard: 
