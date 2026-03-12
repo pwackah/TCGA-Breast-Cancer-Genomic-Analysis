@@ -9,8 +9,8 @@ This project integrates clinical oncology data with mRNA sequencing results from
 * **Data Engineering:** Python (Pandas, NumPy)
 * **Exploratory Analysis:** SQL (BigQuery)
 * **Data Visualization:** Tableau
-* **Domain Knowledge:** Bioinformatics, Oncology, Genomics
-
+* **Domain Knowledge:** Bioinformatics, Genomics, Healthcare, Oncology, Clinical Survival
+                        
 ---
 
 ## 1. The Clinical Challenge (Ask)
